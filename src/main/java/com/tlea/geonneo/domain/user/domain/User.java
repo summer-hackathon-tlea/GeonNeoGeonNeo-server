@@ -1,5 +1,6 @@
 package com.tlea.geonneo.domain.user.domain;
 
+import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,15 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table
+@Table(name = "user_tbl")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)
@@ -23,6 +27,9 @@ public class User extends BaseTimeEntity {
 
     @Column(length = 60, nullable = false)
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<With> withs = new ArrayList<>();
 
     @Builder
     public User(String dongho, String password) {
