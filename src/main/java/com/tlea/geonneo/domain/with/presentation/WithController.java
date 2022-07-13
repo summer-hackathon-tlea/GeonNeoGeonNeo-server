@@ -1,6 +1,7 @@
 package com.tlea.geonneo.domain.with.presentation;
 
 import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
+import com.tlea.geonneo.domain.with.presentation.dto.response.WithDetailResponse;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithResponse;
 import com.tlea.geonneo.domain.with.service.WithService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class WithController {
     @GetMapping
     public List<WithResponse> getAllWiths() {
         return withService.getAllWiths();
+    }
+
+    @GetMapping("/{withId}")
+    public WithDetailResponse getWithDetail(@PathVariable Long withId) {
+        return withService.getWithDetail(withId);
     }
 
     @PostMapping

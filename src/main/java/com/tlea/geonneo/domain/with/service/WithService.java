@@ -2,7 +2,9 @@ package com.tlea.geonneo.domain.with.service;
 
 import com.tlea.geonneo.domain.user.facade.UserFacade;
 import com.tlea.geonneo.domain.with.domain.repository.WithRepository;
+import com.tlea.geonneo.domain.with.facade.WithFacade;
 import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
+import com.tlea.geonneo.domain.with.presentation.dto.response.WithDetailResponse;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 public class WithService {
 
     private final WithRepository withRepository;
+    private final WithFacade withFacade;
     private final UserFacade userFacade;
 
     @Transactional(readOnly = true)
@@ -23,6 +26,12 @@ public class WithService {
         return withRepository.findAll()
                 .stream().map(WithResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public WithDetailResponse getWithDetail(Long withId) {
+        return WithDetailResponse.of(
+                withFacade.findWithById(withId));
     }
 
     @Transactional
