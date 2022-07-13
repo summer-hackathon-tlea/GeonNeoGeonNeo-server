@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "with_tbl")
@@ -37,6 +39,9 @@ public class With extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "with")
+    private List<Wither> withers = new ArrayList<>();
 
     @Builder
     public With(String title, String content, int maxNumberOfPeople, User user) {

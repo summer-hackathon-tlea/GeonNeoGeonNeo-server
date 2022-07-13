@@ -1,6 +1,7 @@
 package com.tlea.geonneo.domain.user.domain;
 
 import com.tlea.geonneo.domain.with.domain.With;
+import com.tlea.geonneo.domain.with.domain.Wither;
 import com.tlea.geonneo.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,6 +31,9 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<With> withs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Wither> withers = new ArrayList<>();
 
     @Builder
     public User(String dongho, String password) {
