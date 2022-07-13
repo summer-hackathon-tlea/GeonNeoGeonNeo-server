@@ -15,4 +15,7 @@ spring:
     hibernate:
       ddl-auto: update
 
+  jwt:
+    secret:
+      afkasdlfjafkljassdflkjasdljfkasdljfhalsdjhfaldkjshfl
 debug: true
