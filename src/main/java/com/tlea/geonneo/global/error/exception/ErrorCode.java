@@ -14,6 +14,8 @@ public enum ErrorCode {
     PASSWORD_MISMATCH(401, "비밀번호가 틀렸습니다."),
 
     WITH_NOT_FOUND(404, "위드를 찾을 수 없습니다."),
+    WITHER_ALREADY_EXISTS(422, "사용자가 이미 위드에 참가했습니다."),
+    FULL_WITH(422, "이미 꽉 찬 위드입니다.")
     ;
 
     private final int status;
