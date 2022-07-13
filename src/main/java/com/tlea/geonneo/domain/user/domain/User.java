@@ -1,5 +1,6 @@
 package com.tlea.geonneo.domain.user.domain;
 
+import com.tlea.geonneo.domain.notification.domain.Notification;
 import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.domain.with.domain.Wither;
 import com.tlea.geonneo.global.entity.BaseTimeEntity;
@@ -31,6 +32,9 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<With> withs = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Wither> withers = new ArrayList<>();
