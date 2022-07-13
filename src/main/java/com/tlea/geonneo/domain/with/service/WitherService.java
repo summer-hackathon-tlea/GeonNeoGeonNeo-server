@@ -34,4 +34,13 @@ public class WitherService {
                         .build()
         );
     }
+
+    public void joinWith(With with, User user) {
+        witherRepository.save(
+                Wither.builder()
+                        .with(with)
+                        .user(user)
+                        .build()
+        );
+    }
 }

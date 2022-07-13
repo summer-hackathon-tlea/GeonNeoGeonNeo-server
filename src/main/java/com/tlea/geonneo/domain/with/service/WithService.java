@@ -1,5 +1,6 @@
 package com.tlea.geonneo.domain.with.service;
 
+import com.tlea.geonneo.domain.user.domain.User;
 import com.tlea.geonneo.domain.user.facade.UserFacade;
 import com.tlea.geonneo.domain.with.domain.repository.WithRepository;
 import com.tlea.geonneo.domain.with.facade.WithFacade;
@@ -20,6 +21,7 @@ public class WithService {
     private final WithRepository withRepository;
     private final WithFacade withFacade;
     private final UserFacade userFacade;
+    private final WitherService witherService;
 
     @Transactional(readOnly = true)
     public List<WithResponse> getAllWiths() {
@@ -36,6 +38,7 @@ public class WithService {
 
     @Transactional
     public void createWith(CreateWithRequest request) {
-        withRepository.save(request.toEntity(userFacade.getCurrentUser()));
+        User user = userFacade.getCurrentUser();
+        witherService.joinWith(withRepository.save(request.toEntity(user)), user);
     }
 }
