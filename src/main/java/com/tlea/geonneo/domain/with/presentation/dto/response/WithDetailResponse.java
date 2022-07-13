@@ -12,6 +12,7 @@ public class WithDetailResponse {
     private String title;
     private String content;
     private int maxNumberOfPeople;
+    private int currentNumberOfPeople;
     private Status status;
     private String dongho;
 
@@ -20,6 +21,7 @@ public class WithDetailResponse {
                 .title(with.getTitle())
                 .content(with.getContent())
                 .maxNumberOfPeople(with.getMaxNumberOfPeople())
+                .currentNumberOfPeople(with.getWithers().size())
                 .status(with.getStatus())
                 .dongho(with.getUser().getDongho())
                 .build();
