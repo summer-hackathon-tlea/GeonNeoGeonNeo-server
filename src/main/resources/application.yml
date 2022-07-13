@@ -1,0 +1,18 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/tlea_geonneo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: tlea
+    password: tlea
+
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+debug: true
