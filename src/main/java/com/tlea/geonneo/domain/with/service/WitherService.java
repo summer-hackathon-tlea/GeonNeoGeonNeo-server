@@ -5,6 +5,7 @@ import com.tlea.geonneo.domain.user.facade.UserFacade;
 import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.domain.with.domain.Wither;
 import com.tlea.geonneo.domain.with.domain.repository.WitherRepository;
+import com.tlea.geonneo.domain.with.domain.type.Authority;
 import com.tlea.geonneo.domain.with.facade.WithFacade;
 import com.tlea.geonneo.domain.with.facade.WitherFacade;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class WitherService {
                 Wither.builder()
                         .with(with)
                         .user(user)
+                        .authority(Authority.MEMBER)
                         .build()
         );
     }
@@ -40,6 +42,7 @@ public class WitherService {
                 Wither.builder()
                         .with(with)
                         .user(user)
+                        .authority(Authority.LEADER)
                         .build()
         );
     }

@@ -1,6 +1,7 @@
 package com.tlea.geonneo.domain.with.domain;
 
 import com.tlea.geonneo.domain.user.domain.User;
+import com.tlea.geonneo.domain.with.domain.type.Authority;
 import com.tlea.geonneo.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,9 +29,13 @@ public class Wither extends BaseTimeEntity {
     @JoinColumn(name = "with_id")
     private With with;
 
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
     @Builder
-    public Wither(User user, With with) {
+    public Wither(User user, With with, Authority authority) {
         this.user = user;
         this.with = with;
+        this.authority = authority;
     }
 }
