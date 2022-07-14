@@ -14,6 +14,7 @@ import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithDetailResponse;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,7 @@ public class WithService {
 
     @Transactional(readOnly = true)
     public List<WithResponse> getAllWiths() {
-        return withRepository.findAll()
+        return withRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
                 .stream().map(WithResponse::of)
                 .collect(Collectors.toList());
     }
