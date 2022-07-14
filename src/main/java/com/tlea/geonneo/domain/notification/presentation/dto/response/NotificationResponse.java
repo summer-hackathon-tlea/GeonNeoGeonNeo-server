@@ -8,12 +8,14 @@ import lombok.Getter;
 @Getter
 public class NotificationResponse {
 
+    private Long id;
     private String sendDongho;
     private String content;
     private boolean isRead;
 
     public static NotificationResponse of(Notification notification) {
         return NotificationResponse.builder()
+                .id(notification.getId())
                 .sendDongho(notification.getSendDongho())
                 .content(notification.getContent())
                 .isRead(notification.getIsRead())

@@ -3,9 +3,7 @@ package com.tlea.geonneo.domain.notification.presentation;
 import com.tlea.geonneo.domain.notification.presentation.dto.response.NotificationResponse;
 import com.tlea.geonneo.domain.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class NotificationController {
     @GetMapping
     public List<NotificationResponse> getAllUserNotification() {
         return notificationService.getAllUserNotification();
+    }
+
+    @PutMapping("/{notificationId}")
+    public void readNotification(@PathVariable Long notificationId) {
+        notificationService.readNotification(notificationId);
     }
 }

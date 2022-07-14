@@ -1,6 +1,8 @@
 package com.tlea.geonneo.domain.notification.service;
 
+import com.tlea.geonneo.domain.notification.domain.Notification;
 import com.tlea.geonneo.domain.notification.domain.repository.NotificationRepository;
+import com.tlea.geonneo.domain.notification.facade.NotificationFacade;
 import com.tlea.geonneo.domain.notification.presentation.dto.request.CreateNotificationRequest;
 import com.tlea.geonneo.domain.notification.presentation.dto.response.NotificationResponse;
 import com.tlea.geonneo.domain.user.facade.UserFacade;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final NotificationFacade notificationFacade;
     private final UserFacade userFacade;
 
     public void createNotification(CreateNotificationRequest request) {
@@ -27,5 +30,11 @@ public class NotificationService {
         return userFacade.getCurrentUser().getNotifications()
                 .stream().map(NotificationResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void readNotification(Long notificationId) {
+        Notification notification = notificationFacade.findNotificationById(notificationId);
+        notification.read();
     }
 }
