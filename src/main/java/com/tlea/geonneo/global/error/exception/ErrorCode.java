@@ -15,7 +15,9 @@ public enum ErrorCode {
 
     WITH_NOT_FOUND(404, "위드를 찾을 수 없습니다."),
     WITHER_ALREADY_EXISTS(422, "사용자가 이미 위드에 참가했습니다."),
-    FULL_WITH(422, "이미 꽉 찬 위드입니다.")
+    FULL_WITH(422, "이미 꽉 찬 위드입니다."),
+
+    NOTIFICATION_NOT_FOUND(404, "알림을 찾을 수 없습니다.")
     ;
 
     private final int status;
