@@ -9,6 +9,7 @@ import lombok.Getter;
 public class NotificationResponse {
 
     private Long id;
+    private Long withId;
     private String sendDongho;
     private String content;
     private boolean isRead;
@@ -16,6 +17,7 @@ public class NotificationResponse {
     public static NotificationResponse of(Notification notification) {
         return NotificationResponse.builder()
                 .id(notification.getId())
+                .id(notification.getWith().getId())
                 .sendDongho(notification.getSendDongho())
                 .content(notification.getContent())
                 .isRead(notification.getIsRead())

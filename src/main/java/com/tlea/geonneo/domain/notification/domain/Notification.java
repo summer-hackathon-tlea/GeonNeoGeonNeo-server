@@ -1,6 +1,7 @@
 package com.tlea.geonneo.domain.notification.domain;
 
 import com.tlea.geonneo.domain.user.domain.User;
+import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.global.entity.BaseTimeEntity;
 import com.tlea.geonneo.global.utils.BooleanToYNConverter;
 import lombok.*;
@@ -28,15 +29,20 @@ public class Notification extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "with_id")
+    private With with;
+
     @Convert(converter = BooleanToYNConverter.class)
     @Column(length = 1, nullable = false)
     private Boolean isRead;
 
     @Builder
-    public Notification(String sendDongho, String content, User user) {
+    public Notification(String sendDongho, String content, User user, With with) {
         this.sendDongho = sendDongho;
         this.content = content;
         this.user = user;
+        this.with = with;
         this.isRead = false;
     }
 

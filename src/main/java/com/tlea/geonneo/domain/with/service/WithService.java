@@ -54,6 +54,7 @@ public class WithService {
                         .sendDongho(user.getDongho())
                         .content(with.getTitle())
                         .user(userFacade.getAllUserWithoutUser(user))
+                        .with(with)
                         .build()
         );
     }
