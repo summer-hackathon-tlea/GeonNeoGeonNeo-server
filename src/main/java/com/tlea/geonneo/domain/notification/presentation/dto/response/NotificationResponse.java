@@ -17,7 +17,7 @@ public class NotificationResponse {
     public static NotificationResponse of(Notification notification) {
         return NotificationResponse.builder()
                 .id(notification.getId())
-                .id(notification.getWith().getId())
+                .withId(notification.getWith().getId())
                 .sendDongho(notification.getSendDongho())
                 .content(notification.getContent())
                 .isRead(notification.getIsRead())
