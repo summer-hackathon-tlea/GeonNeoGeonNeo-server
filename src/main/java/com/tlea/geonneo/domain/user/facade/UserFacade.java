@@ -7,10 +7,15 @@ import com.tlea.geonneo.domain.user.exception.UserAlreadyExistsException;
 import com.tlea.geonneo.domain.user.exception.UserNotFoundException;
 import com.tlea.geonneo.global.security.auth.AuthDetails;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UserFacade {
@@ -21,6 +26,12 @@ public class UserFacade {
     public User findUserByDongho(String dongho) {
         return userRepository.findByDongho(dongho)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+
+    public List<User> getAllUserWithoutUser(User user) {
+        return userRepository.findAll()
+                .stream().filter(u -> !u.getDongho().equals(user.getDongho()))
+                .collect(Collectors.toList());
     }
 
     public User getCurrentUser() {
