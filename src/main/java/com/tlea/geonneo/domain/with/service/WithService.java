@@ -1,7 +1,10 @@
 package com.tlea.geonneo.domain.with.service;
 
+import com.tlea.geonneo.domain.notification.presentation.dto.request.CreateNotificationRequest;
+import com.tlea.geonneo.domain.notification.service.NotificationService;
 import com.tlea.geonneo.domain.user.domain.User;
 import com.tlea.geonneo.domain.user.facade.UserFacade;
+import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.domain.with.domain.repository.WithRepository;
 import com.tlea.geonneo.domain.with.facade.WithFacade;
 import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
@@ -22,6 +25,7 @@ public class WithService {
     private final WithFacade withFacade;
     private final UserFacade userFacade;
     private final WitherService witherService;
+    private final NotificationService notificationService;
 
     @Transactional(readOnly = true)
     public List<WithResponse> getAllWiths() {
@@ -39,6 +43,14 @@ public class WithService {
     @Transactional
     public void createWith(CreateWithRequest request) {
         User user = userFacade.getCurrentUser();
-        witherService.joinWith(withRepository.save(request.toEntity(user)), user);
+        With with = withRepository.save(request.toEntity(user));
+        witherService.joinWith(with, user);
+        notificationService.createNotification(
+                CreateNotificationRequest.builder()
+                        .sendDongho(user.getDongho())
+                        .content(with.getTitle())
+                        .user(userFacade.getAllUserWithoutUser(user))
+                        .build()
+        );
     }
 }
