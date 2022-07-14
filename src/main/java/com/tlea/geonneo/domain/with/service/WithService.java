@@ -6,7 +6,10 @@ import com.tlea.geonneo.domain.user.domain.User;
 import com.tlea.geonneo.domain.user.facade.UserFacade;
 import com.tlea.geonneo.domain.with.domain.With;
 import com.tlea.geonneo.domain.with.domain.repository.WithRepository;
+import com.tlea.geonneo.domain.with.domain.type.Authority;
+import com.tlea.geonneo.domain.with.domain.type.Status;
 import com.tlea.geonneo.domain.with.facade.WithFacade;
+import com.tlea.geonneo.domain.with.facade.WitherFacade;
 import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithDetailResponse;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithResponse;
@@ -26,6 +29,7 @@ public class WithService {
     private final UserFacade userFacade;
     private final WitherService witherService;
     private final NotificationService notificationService;
+    private final WitherFacade witherFacade;
 
     @Transactional(readOnly = true)
     public List<WithResponse> getAllWiths() {
@@ -52,5 +56,13 @@ public class WithService {
                         .user(userFacade.getAllUserWithoutUser(user))
                         .build()
         );
+    }
+
+    @Transactional
+    public void updateWithStatus(Long withId, Status status) {
+        With with = withFacade.findWithById(withId);
+        witherFacade.checkWitherPermission(
+                with, userFacade.getCurrentUser(), Authority.LEADER);
+        with.updateWithStatus(status);
     }
 }

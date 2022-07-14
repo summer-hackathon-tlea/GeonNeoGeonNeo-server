@@ -51,4 +51,8 @@ public class With extends BaseTimeEntity {
         this.status = Status.READY;
         this.user = user;
     }
+
+    public void updateWithStatus(Status status) {
+        this.status = status;
+    }
 }

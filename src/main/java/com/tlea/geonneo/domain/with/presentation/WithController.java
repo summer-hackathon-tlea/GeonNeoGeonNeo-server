@@ -1,5 +1,6 @@
 package com.tlea.geonneo.domain.with.presentation;
 
+import com.tlea.geonneo.domain.with.domain.type.Status;
 import com.tlea.geonneo.domain.with.presentation.dto.request.CreateWithRequest;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithDetailResponse;
 import com.tlea.geonneo.domain.with.presentation.dto.response.WithResponse;
@@ -30,5 +31,10 @@ public class WithController {
     @PostMapping
     public void createWith(@RequestBody @Valid CreateWithRequest request) {
         withService.createWith(request);
+    }
+
+    @PutMapping("/{withId}")
+    public void updateStatus(@PathVariable Long withId, @RequestParam Status status) {
+        withService.updateWithStatus(withId, status);
     }
 }
